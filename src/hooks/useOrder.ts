@@ -7,13 +7,13 @@ export default function useOrder(){
 
     function addItem(item : MenuItem){
 
-        const itemExists = order.findIndex(e => e.id === item.id);
+        const itemExists = order.find(orderItem => orderItem.id === item.id);
 
-        if(itemExists >= 0){
+        if(itemExists){
 
             // Ya existe
-            const orderUpdate = [...order];
-            orderUpdate[itemExists].quantity++;
+            const orderUpdate = order.map(orderItem => orderItem.id === item.id ? {...orderItem, quantity: orderItem.quantity + 1 } : orderItem);
+    
             setOrder(orderUpdate);
         }else{
 
