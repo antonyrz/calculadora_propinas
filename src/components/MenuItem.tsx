@@ -13,6 +13,7 @@ export default function MenuItem({item, addItem} : MenuItemProps) {
     onClick={() => addItem(item)}>
         <p>{item.name}</p>
         <p className="font-bold">${item.price}</p>
+        <p>hola</p>
     </button>
   )
 }
