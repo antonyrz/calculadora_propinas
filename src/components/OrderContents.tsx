@@ -16,9 +16,20 @@ export default function OrderContents({order} : orderContentsProps){
                     ? <p>La orden está vacia</p>
                     : (
                         order.map(item => (
-                            <div key={item.id}>
-                                <p>{item.name}</p>
+                            <div key={item.id} className="flex items-center justify-between py-2 border-t-2 border-gray-200">
+                                <div>
+                                    <p>{item.name} - {item.price}</p>
+                                    <p>Cantidad: {item.quantity}</p>
+                                    <p>Total: {item.quantity * item.price}</p>
+                                </div>
+
+                                <div>
+                                    <button className="bg-red-600 text-white h-8 w-8 rounded-4xl font-bold cursor-pointer">
+                                        X
+                                    </button>
+                                </div>
                             </div>
+                            
                         ))
                     )}
                 </div>
