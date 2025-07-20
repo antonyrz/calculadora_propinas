@@ -4,14 +4,17 @@ import { useMemo } from "react";
 
 type OrderTotalsProps = {
   order: OrderItem[],
-  tip: number
+  tip: number,
+  placeOrder: () => void,
 };
 
-export default function OrderTotals({order, tip} : OrderTotalsProps) {
+export default function OrderTotals({order, tip, placeOrder} : OrderTotalsProps) {
 
   const subTotalAmount = useMemo(() => order.reduce((total, item) => total + (item.price * item.quantity), 0), [order]);
 
   const tipAmount = useMemo(() => subTotalAmount * tip, [tip, subTotalAmount]);
+
+  const totalAmount = useMemo(() => subTotalAmount + tipAmount, [tipAmount, subTotalAmount])
 
     return (
 
@@ -27,12 +30,16 @@ export default function OrderTotals({order, tip} : OrderTotalsProps) {
           </p>
 
           <p>Total a pagar: {''}
-              <span className="font-bold">$0</span>
+              <span className="font-bold">{formatCurrency(totalAmount)}</span>
           </p>
         </div>
 
-        <button>
-
+        <button 
+        className="cursor-pointer w-full bg-black p-3 uppercase text-white font-bold disabled:opacity-10 disabled:cursor-auto"
+        disabled={totalAmount === 0}
+        onClick={placeOrder}
+        >
+          Guardar Orden
         </button>
       </>
 

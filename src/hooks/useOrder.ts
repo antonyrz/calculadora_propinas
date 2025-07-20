@@ -26,12 +26,18 @@ export default function useOrder(){
     function removeItem(id : OrderItem['id']){
         setOrder(order.filter(item => item.id !== id));
     };
-    
+
+    function placeOrder(){
+        setOrder([]);
+        setTip(0);
+    };   
+
     return{
         order,
         tip,
         setTip,
         addItem,
-        removeItem
+        removeItem,
+        placeOrder
     };   
 }
